@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>A propos de mon Site</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-2: #0ea5e9;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 30%, var(--bg) 100%);
+    }
+    header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 1rem;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: 0.3px;
+    }
+    .subtitle {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin: 1rem auto 2rem;
+      max-width: 900px;
+    }
+    .filters button {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .filters button.active,
+    .filters button:hover {
+      border-color: var(--accent);
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem 3rem;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    figure {
+      margin: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    figure:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.09);
+    }
+    .image-wrap {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    figure:hover .image-wrap img {
+      transform: scale(1.03);
+    }
+    figcaption {
+      padding: 0.75rem 0.9rem 0.9rem;
+    }
+    .caption-title {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .caption-text {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+    .tag {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--accent);
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+    }
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    /* Utilitaires */
+    [hidden] { display: none !important; }
+  </style>
+  
+  
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos de nous</a></li>
+        <li><a href="services.html">Photos</a></li>
+		<li><a href="photos.html">Souvenirs</a></li>
+        <li><a href="portfolio.html">Vidéos</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button id="menu-toggle">☰</button>
+    </nav>
+  </header>
+
+ <main>
+  <h1>À propos</h1>
+  <p>La famille est bien plus qu’un simple groupe de personnes : 
+  elle constitue le premier cercle de socialisation, de soutien et de transmission des valeurs. 
+  Elle joue un rôle fondamental dans la construction de l’identité et le bien-être de chacun.</p>
+</main>
+
+
+  <footer>
+   <p>&copy; 2026 Famille Bushenyula, 🤝 <strong>« Ensemble, toujours plus forts »</strong></p>
+  </footer>
+  
+  <script>
+    // Filtrage par thème
+    const buttons = document.querySelectorAll(".filters button");
+    const items = document.querySelectorAll(".gallery figure");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const filter = btn.dataset.filter;
+
+        items.forEach(item => {
+          const cat = item.dataset.category;
+          if (filter === "all" || cat === filter) {
+            item.hidden = false;
+          } else {
+            item.hidden = true;
+          }
+        });
+      });
+    });
+  </script>
+  
+</body>
+</html>
